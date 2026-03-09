@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos livres{% endblock %}
+
+{% block body %}
+<h1>Détail du livre</h1>
+    <div class="row">
+        <div class="col-4">
+         <div class="card">
+             <div class="card-header">
+                <h4>{{ livre.titre }} ({{ livre.prix }}DT)</h4>
+             </div>
+             <div class="card-body">
+                 <img src="{{ livre.image }}" class="img-fluid" alt="photo">
+             </div>
+         </div>
+        </div>
+        <div class="col">
+       <H5>Editeur: {{ livre.editeur }}</H5>
+            <H5>Date d'édition: {{ livre.dateEdition|date('d-m-y') }}</H5>
+           <p>{{ livre.resume }}</p>>
+            {% if livre.qte>0 %}
+                <span class="badge bg-success">Quantité disponible:
+                {{ livre.qte }}</span>
+                {% else %}
+                    <span class="badge bg-danger">En repture de stock</span>
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

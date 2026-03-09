@@ -38,6 +38,9 @@ class Livres
     #[ORM\Column]
     private ?float $prix = null;
 
+    #[ORM\Column]
+    private ?int $qte = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class Livres
     public function setPrix(float $prix): static
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getQte(): ?int
+    {
+        return $this->qte;
+    }
+
+    public function setQte(int $qte): static
+    {
+        $this->qte = $qte;
 
         return $this;
     }
