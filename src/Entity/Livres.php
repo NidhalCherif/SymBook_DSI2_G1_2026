@@ -41,6 +41,9 @@ class Livres
     #[ORM\Column]
     private ?int $qte = null;
 
+    #[ORM\ManyToOne(inversedBy: 'livres')]
+    private ?Categories $cat = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +153,18 @@ class Livres
     public function setQte(int $qte): static
     {
         $this->qte = $qte;
+
+        return $this;
+    }
+
+    public function getCat(): ?Categories
+    {
+        return $this->cat;
+    }
+
+    public function setCat(?Categories $cat): static
+    {
+        $this->cat = $cat;
 
         return $this;
     }
