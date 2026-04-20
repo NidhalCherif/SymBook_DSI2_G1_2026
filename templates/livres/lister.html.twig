@@ -4,7 +4,10 @@
 
 {% block body %}
 <h1>Liste des livres</h1>
-    <table class="table">
+    <div class="text-end">
+    <a href="{{ url('admin_livres_add') }}"  class="btn btn-primary">Ajouter un nouveau livre</a>
+    </div>
+    <table class="table mt-1">
         <tr class="table-primary">
             <th>Titre</th>
             <th>ISBN</th>
@@ -23,9 +26,9 @@
                 <td>{{ livre.dateEdition|date('d-m-Y') }}</td>
                 <td>{{ livre.prix }}</td>
                 <td>{{ livre.cat.libelle }}</td>
-                <td><a href="{{ url('livres_show',{'id':livre.id}) }}">Voir détail</a></td>
+                <td><a href="{{ url('admin_livres_show',{'id':livre.id}) }}">Voir détail</a></td>
                 <td><a href="#">Editer</a></td>
-                <td><a href="{{ url('livres_delete',{'id':livre.id}) }}">Supprimer</a></td>
+                <td><a href="{{ url('admin_livres_delete',{'id':livre.id}) }}">Supprimer</a></td>
 
 
             </tr>

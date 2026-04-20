@@ -28,17 +28,21 @@ final class CategoriesController extends AbstractController
         $form = $this->createForm(CategorieType::class, $cat);
         $form->handleRequest($request); // faire le lien entre $form et request qui recupère les données
         if ($form->isSubmitted()&& $form->isValid()) {
+           try {
+               // 1 alimenter l'objet $cat par les données du formulaire
+               $cat = $form->getData(); //getData retourne un objet cat
 
-            // 1 alimenter l'objet $cat par les données du formulaire
-            $cat=$form->getData(); //getData retourne un objet cat
+               //2 Persister cat et flush
+               $em->persist($cat);
+               $em->flush();
 
-            //2 Persister cat et flush
-            $em->persist($cat);
-            $em->flush();
-
-            //redirection vers liste des catégories
-            return $this->redirectToRoute('categories');
-
+               //redirection vers liste des catégories
+               $this->addFlash('success', "Catégorie ajoutée avec succèes");
+               $this->addFlash('info', "Veuillez continuer l'ajout");
+               return $this->redirectToRoute('categories');
+           }catch (\Exception $e){
+               $this->addFlash('danger', "Une erreur est survenue lors de l'ajout");
+           }
         }
         return $this->render('categories/add.html.twig', ['f'=>$form]);
     }
